@@ -12,6 +12,9 @@ use Kpacha\BenchmarkTool\Helper\FinderFactory;
 abstract class Gnuplot
 {
 
+    const CSV_LOG_EXTENSION = '.csv';
+    const AB_DATA_EXTENSION = '.dat';
+
     /**
      * @var string
      */
