@@ -71,7 +71,6 @@ class Container extends Pimple
             'heatmap' => 'Kpacha\BenchmarkTool\Processor\BasicHeatMap',
             'response' => 'Kpacha\BenchmarkTool\Processor\ResponseTime',
             'distribution' => 'Kpacha\BenchmarkTool\Processor\ResponseTimeDistribution',
-            'percentage' => 'Kpacha\BenchmarkTool\Processor\ResponseTimeDistributionPercentage',
         );
         $this['plotterFactory'] = function ($c) {
                     return new GnuplotFactory($c);
