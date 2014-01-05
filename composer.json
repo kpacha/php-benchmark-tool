@@ -24,5 +24,9 @@
             "Kpacha\\BenchmarkTool": "src",
             "Kpacha\\Tests\\BenchmarkTool\\": "tests"
         }
-    }
+    },
+    "scripts": {
+        "post-install-cmd": ["mkdir -p build/ab", "mkdir -p public/reports"]
+    },
+    "bin": ["bin/console"]
 }
