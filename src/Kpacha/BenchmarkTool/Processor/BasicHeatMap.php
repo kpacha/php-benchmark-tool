@@ -7,19 +7,14 @@ namespace Kpacha\BenchmarkTool\Processor;
  *
  * @author Kpacha <kpacha666@gmail.com>
  */
-class BasicHeatMap extends Gnuplot
+class BasicHeatMap extends AbstractGroup
 {
-
-    protected function buildGraphs($name, $files)
-    {
-        $this->exec($this->getCommandOptions($name, $files));
-    }
 
     protected function getCommandOptions($name, $files)
     {
         $plot = array();
         foreach ($files as $file) {
-            $plot[] = "'$file' using 2:5 title '' with points lt 1";
+            $plot[] = "'$file' using 2:5 title '' with points pt 1 ps 0.5";
         }
         $plotCommand = implode(', ', $plot);
         return <<<EOD

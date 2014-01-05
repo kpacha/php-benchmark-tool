@@ -7,13 +7,8 @@ namespace Kpacha\BenchmarkTool\Processor;
  *
  * @author Kpacha <kpacha666@gmail.com>
  */
-class Frequency extends Gnuplot
+class Frequency extends AbstractGroup
 {
-
-    protected function buildGraphs($name, $files)
-    {
-        $this->exec($this->getCommandOptions($name, $files));
-    }
 
     protected function getCommandOptions($name, $files)
     {
