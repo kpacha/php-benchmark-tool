@@ -28,7 +28,7 @@ class Ab extends Base
         $concurrency = $this->getArgument('concurrency', self::CONCURRENCY);
         $logFile = $this->getLogFile($target);
         $plotableLog = $this->getPlotableLogFile($target);
-        return "-k -t $timeLimit -c $concurrency -g $plotableLog $target > $logFile 2> /dev/null";
+        return "-k -t $timeLimit -c $concurrency -g $plotableLog.dat -e $plotableLog.csv $target > $logFile 2> /dev/null";
     }
 
     protected function cleanOutput($target, array $output)
@@ -39,7 +39,7 @@ class Ab extends Base
 
     protected function getPlotableLogFile($target)
     {
-        return str_replace('.log', '.dat', $this->getLogFile($target));
+        return str_replace('.log', '', $this->getLogFile($target));
     }
 
     protected function getLogFile($target)
