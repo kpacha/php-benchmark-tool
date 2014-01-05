@@ -39,15 +39,15 @@
         {% for group in groups %}
             <div id="{{ group }}">
                 <h3>{{ group }}</h3>
-                <div><img src="{{ config['html']['outputPath'] }}/{{ group }}.frequency.png"></div>
-                <div><img src="{{ config['html']['outputPath'] }}/{{ group }}.heatmap.png"></div>
+                <div><img src="{{ group }}.frequency.png"></div>
+                <div><img src="{{ group }}.heatmap.png"></div>
             {% for target in targets[group] %}
                     <div id="{{ hashes[group][target] }}">
                         <h4>{{ target }}</h4>
                         <div><pre>{{ logs[hashes[group][target]].contents }}</pre></div>
-                        <div><img src="{{ config['html']['outputPath'] }}/{{ hashes[group][target] }}.sequence.png"></div>
-                        <div><img src="{{ config['html']['outputPath'] }}/{{ hashes[group][target] }}.percentage.png"></div>
-                        <div><img src="{{ config['html']['outputPath'] }}/{{ hashes[group][target] }}.timeseries.png"></div>
+                        <div><img src="{{ hashes[group][target] }}.sequence.png"></div>
+                        <div><img src="{{ hashes[group][target] }}.percentage.png"></div>
+                        <div><img src="{{ hashes[group][target] }}.timeseries.png"></div>
                         <div><a href="#">Up</a></div>
                     </div>
             {% endfor %}
