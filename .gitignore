@@ -1,0 +1,6 @@
+vendor/
+build/
+public/report/
+composer.phar
+phpunit.xml
+config/config.php

@@ -1,0 +1,12 @@
+#!/usr/bin/env php
+<?php
+// app/console
+
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../config/config.php';
+
+use Kpacha\BenchmarkTool\Console\Application;
+use Kpacha\BenchmarkTool\Container;
+
+$application = new Application(new Container($config));
+$application->run();

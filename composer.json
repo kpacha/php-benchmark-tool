@@ -1,0 +1,28 @@
+{
+    "name": "kpacha/php-benchmark-tool",
+    "description": "PHP Benchmarking Tool",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kpacha",
+            "email": "kpacha666@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/finder": "*",
+        "twig/twig": "1.*",
+        "symfony/console": "*",
+        "pimple/pimple": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~3.7.24",
+        "satooshi/php-coveralls": "dev-master",
+        "squizlabs/php_codesniffer": "~1.5.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Kpacha\\BenchmarkTool": "src",
+            "Kpacha\\Tests\\BenchmarkTool\\": "tests"
+        }
+    }
+}

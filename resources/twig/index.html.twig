@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Component-Benchmark results</title>
+    </head>
+    <body>
+        <ul id="navigation">
+        {% for group in groups %}
+            <li>
+                <a href="#{{ group }}">{{ group }}</a>
+                <ul>
+            {% for target in targets[group] %}
+                    <li><a href="#{{ hashes[group][target] }}">{{ target }}</a></li>
+            {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+        </ul>
+
+        <h1>Component Benchmark</h1>
+        
+        <h2>Ab Configuration</h2>
+        <table>
+            <tr>
+                <td>Time limit</td>
+                <td>{{ config['ab']['arguments']['timeLimit'] }}</td>
+            </tr>
+            <tr>
+                <td>Concurrency</td>
+                <td>{{ config['ab']['arguments']['concurrency'] }}</td>
+            </tr>
+            <tr>
+                <td>Log folder</td>
+                <td>{{ config['ab']['arguments']['logPath'] }}</td>
+            </tr>
+        </table>
+        
+        <h2>Results</h2>
+        {% for group in groups %}
+            <div id="{{ group }}">
+                <h3>{{ group }}</h3>
+                <div><img src="{{ config['html']['outputPath'] }}/{{ group }}.frequency.png"></div>
+                <div><img src="{{ config['html']['outputPath'] }}/{{ group }}.heatmap.png"></div>
+            {% for target in targets[group] %}
+                    <div id="{{ hashes[group][target] }}">
+                        <h4>{{ target }}</h4>
+                        <div><pre>{{ logs[hashes[group][target]].contents }}</pre></div>
+                        <div><img src="{{ config['html']['outputPath'] }}/{{ hashes[group][target] }}.sequence.png"></div>
+                        <div><img src="{{ config['html']['outputPath'] }}/{{ hashes[group][target] }}.timeseries.png"></div>
+                        <div><a href="#">Up</a></div>
+                    </div>
+            {% endfor %}
+            </div>
+        {% endfor %}
+    </body>
+</html>
