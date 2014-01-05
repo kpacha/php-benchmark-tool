@@ -26,7 +26,7 @@ class ResponseTime extends Gnuplot
     set xdata time; set timefmt \"%s\"; set format x \"%S\"; \
     set title \"Response time\"; \
     set output '{$this->outputPath}$output.timeseries.png'; \
-    plot \"$input\" using 2:5 title '' with points;"
+    plot \"$input\" using 2:5 title '' with points pt 1 ps 0.5;"
 EOD;
     }
 
