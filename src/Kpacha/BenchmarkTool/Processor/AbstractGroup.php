@@ -10,12 +10,11 @@ namespace Kpacha\BenchmarkTool\Processor;
 abstract class AbstractGroup extends Gnuplot
 {
 
-    protected function buildGraphs($name, $files)
+    protected function buildGraphs($name, $targets, $files)
     {
-        $this->exec($this->getCommandOptions($name, $files));
+        $this->exec($this->getCommandOptions($name, $targets, $files));
     }
 
-    abstract protected function getCommandOptions($name, $files);
+    abstract protected function getCommandOptions($name, $targets, $files);
 
 }
-

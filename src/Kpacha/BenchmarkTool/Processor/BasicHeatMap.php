@@ -10,11 +10,13 @@ namespace Kpacha\BenchmarkTool\Processor;
 class BasicHeatMap extends AbstractGroup
 {
 
-    protected function getCommandOptions($name, $files)
+    protected function getCommandOptions($name, $targets, $files)
     {
         $plot = array();
-        foreach ($files as $file) {
-            $plot[] = "'$file' using 2:5 title '' with points pt 1 ps 0.5";
+        foreach ($files as $key => $file) {
+            $plot[] = sprintf(
+                    "'%s' using 2:5 title '%s' with points pt 1 ps 0.5", $file, basename($targets[$key], '.php')
+            );
         }
         $plotCommand = implode(', ', $plot);
         return <<<EOD

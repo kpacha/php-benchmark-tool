@@ -46,7 +46,8 @@ abstract class Gnuplot
             $this->setParams($params);
         }
         foreach ($targets as $groupName => $group) {
-            $this->buildGraphs($groupName, $this->getDatFiles($group));
+            $indexedTargets = $this->getLogReferences($group);
+            $this->buildGraphs($groupName, $indexedTargets, $this->getDatFiles($indexedTargets));
         }
     }
 
@@ -57,23 +58,27 @@ abstract class Gnuplot
         $this->commandPath = $params['path'];
     }
 
-    protected function getDatFiles($targets)
+    protected function getLogReferences($targets)
     {
-        $pattern = array();
+        $indexedTargets = array();
         foreach ($targets as $target) {
-            $pattern[] = md5($target);
+            $indexedTargets[md5($target)] = $target;
         }
-        $finder = $this->finderFactory->create()->files()
-                ->in($this->logFolder)
-                ->name('@(' . implode('|', $pattern) . ')\.dat@');
+        return $indexedTargets;
+    }
+
+    protected function getDatFiles(array $targets)
+    {
+        $pattern = '@(' . implode('|', array_keys($targets)) . ')\\' . self::AB_DATA_EXTENSION . '@';
+        $finder = $this->finderFactory->create()->files()->in($this->logFolder)->name($pattern);
         $files = array();
         foreach ($finder as $file) {
-            $files[] = $file->getRealpath();
+            $files[$file->getBasename(self::AB_DATA_EXTENSION)] = $file->getRealpath();
         }
         return $files;
     }
 
-    abstract protected function buildGraphs($name, $files);
+    abstract protected function buildGraphs($name, $targets, $files);
 
     protected function exec($commandOptions)
     {

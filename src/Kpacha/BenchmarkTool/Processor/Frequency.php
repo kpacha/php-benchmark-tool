@@ -10,12 +10,14 @@ namespace Kpacha\BenchmarkTool\Processor;
 class Frequency extends AbstractGroup
 {
 
-    protected function getCommandOptions($name, $files)
+    protected function getCommandOptions($name, $targets, $files)
     {
         $plot = array();
         foreach ($files as $key => $file) {
-            $file = str_replace(self::AB_DATA_EXTENSION, self::CSV_LOG_EXTENSION, $file);
-            $plot[] = "'$file' using 1:2 smooth sbezier with lines title '$key'";
+            $plot[] = sprintf(
+                    "'%s' using 1:2 smooth sbezier with lines title '%s'",
+                    $this->getLogFilePath($file), basename($targets[$key], '.php')
+            );
         }
         $plotCommand = implode(', ', $plot);
         return <<<EOD
@@ -27,6 +29,11 @@ class Frequency extends AbstractGroup
     set output '{$this->outputPath}$name.frequency.png'; \
     plot $plotCommand;"
 EOD;
+    }
+    
+    protected function getLogFilePath($file)
+    {
+        return str_replace(self::AB_DATA_EXTENSION, self::CSV_LOG_EXTENSION, $file);
     }
 
 }

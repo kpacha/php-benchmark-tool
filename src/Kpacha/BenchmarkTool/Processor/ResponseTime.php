@@ -9,7 +9,7 @@ namespace Kpacha\BenchmarkTool\Processor;
  */
 class ResponseTime extends Gnuplot
 {
-    protected function buildGraphs($name, $files)
+    protected function buildGraphs($name, $targets, $files)
     {
         foreach ($files as $file) {
             $this->exec($this->getCommandOptions($name, $file, str_replace(self::AB_DATA_EXTENSION, '', basename($file))));
