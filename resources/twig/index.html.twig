@@ -1,56 +1,49 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Component-Benchmark results</title>
-    </head>
-    <body>
-        <ul id="navigation">
-        {% for group in groups %}
-            <li>
-                <a href="#{{ group }}">{{ group }}</a>
-                <ul>
-            {% for target in targets[group] %}
-                    <li><a href="#{{ hashes[group][target] }}">{{ target }}</a></li>
-            {% endfor %}
-                </ul>
-            </li>
-        {% endfor %}
-        </ul>
+{% extends "layout/layout.twig" %}
+{% block title %}Dashboard{% endblock %}
+{% block head %}
+    {{ parent() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12"><h2>Ab Configuration</h2></div>
+    </div>
+    <table class="table">
+        <tr>
+            <td>Time limit</td>
+            <td>{{ config['ab']['arguments']['timeLimit'] }}</td>
+        </tr>
+        <tr>
+            <td>Concurrency</td>
+            <td>{{ config['ab']['arguments']['concurrency'] }}</td>
+        </tr>
+        <tr>
+            <td>Log folder</td>
+            <td>{{ config['ab']['arguments']['logPath'] }}</td>
+        </tr>
+    </table>
 
-        <h1>Component Benchmark</h1>
-        
-        <h2>Ab Configuration</h2>
-        <table>
-            <tr>
-                <td>Time limit</td>
-                <td>{{ config['ab']['arguments']['timeLimit'] }}</td>
-            </tr>
-            <tr>
-                <td>Concurrency</td>
-                <td>{{ config['ab']['arguments']['concurrency'] }}</td>
-            </tr>
-            <tr>
-                <td>Log folder</td>
-                <td>{{ config['ab']['arguments']['logPath'] }}</td>
-            </tr>
-        </table>
-        
-        <h2>Results</h2>
-        {% for group in groups %}
-            <div id="{{ group }}">
-                <h3>{{ group }}</h3>
-                <div><img src="{{ group }}.frequency.png"></div>
-                <div><img src="{{ group }}.heatmap.png"></div>
-            {% for target in targets[group] %}
-                    <div id="{{ hashes[group][target] }}">
-                        <h4>{{ target }}</h4>
-                        <div><pre>{{ logs[hashes[group][target]].contents }}</pre></div>
-                        <div><img src="{{ hashes[group][target] }}.percentage.png"></div>
-                        <div><img src="{{ hashes[group][target] }}.timeseries.png"></div>
-                        <div><a href="#">Up</a></div>
-                    </div>
-            {% endfor %}
+    <div class="row">
+        <div class="col-md-12"><h2>Results</h2></div>
+    </div>
+    {% for group in groups %}
+        <div id="{{ group }}" class="row">
+            <div class="col-md-12"><h3>{{ group }}</h3></div>
+            <div class="col-md-6"><img src="{{ group }}.frequency.png"></div>
+            <div class="col-md-6"><img src="{{ group }}.heatmap.png"></div>
+        </div>
+        {% for target in targets[group] %}
+        <div id="{{ hashes[group][target] }}" class="row">
+            <div class="col-md-10"><h4>{{ target }}</h4></div>
+            <div class="col-md-2"><a href="#" class="pull-right">Up</a></div>
+            <div class="col-md-6"><pre>{{ logs[hashes[group][target]].contents }}</pre></div>
+            <div class="col-md-6">
+                <div><img src="{{ hashes[group][target] }}.percentage.png"></div>
+                <div><img src="{{ hashes[group][target] }}.timeseries.png"></div>
             </div>
+        </div>
         {% endfor %}
-    </body>
-</html>
+    {% endfor %}
+{% endblock %}

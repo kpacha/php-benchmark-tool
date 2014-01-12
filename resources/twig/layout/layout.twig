@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+        <meta charset='utf-8'>
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+        <link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet">
+        <link href="http://getbootstrap.com/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="http://getbootstrap.com/examples/theme/theme.css" rel="stylesheet">
+        <!--[if lt IE 9]>
+        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <style>
+            .github-btn {
+                border: 0;
+                overflow: hidden;
+            }
+        </style>
+        <title>{% block title %}{% endblock %} - PHP-Benchmark-Tool</title>
+        {% endblock %}
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">PHP-Benchmark-Tool</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" href="#">Results</a>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                {% for group in groups %}
+                                    <li><a href="#{{ group }}">{{ group }}</a></li>
+                                    {% for target in targets[group] %}
+                                    <li><a href="#{{ hashes[group][target] }}">{{ target }}</a></li>
+                                    {% endfor %}
+                                    <li class="divider"></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="https://github.com/kpacha/php-benchmark-tool/issues" target="_blank">Issues</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="https://github.com/kpacha/php-benchmark-tool/" target="_blank">Fork me!</a>
+                        </li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+        
+        <div class="container theme-showcase">{% block content %}{% endblock %}</div>
+
+        <div class="container footer">
+            {% block footer %}
+                report generated at {{ generatedAt|date }} | powered by <a href="https://github.com/kpacha/php-benchmark-tool/" target="_blank">PHP Benchmark Tool</a>.
+            {% endblock %}
+            <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+            <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+            <script src="http://getbootstrap.com/docs-assets/js/holder.js"></script>
+        </div>
+    </body>
+</html>

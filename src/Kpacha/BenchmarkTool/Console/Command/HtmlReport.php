@@ -63,13 +63,14 @@ class HtmlReport extends ProcessorCommand
     {
         return array(
             'targets' => $this->getTargets(),
+            'generatedAt' => time(),
             'config' => $this->container
         );
     }
 
     private function getAllTemplates()
     {
-        return $this->container['finderFactory']->create()->files()->in($this->container['html']['templatePath']);
+        return $this->container['finderFactory']->create()->files()->in($this->container['html']['templatePath'])->depth('== 0');
     }
 
     private function getPrinter()
