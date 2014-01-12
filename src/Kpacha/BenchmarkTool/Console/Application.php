@@ -13,7 +13,7 @@ use Kpacha\BenchmarkTool\Container;
 class Application extends BaseApplication
 {
     const NAME = 'The "Component-Benchmark" Console Application';
-    const VERSION = '0.1';
+    const VERSION = '0.2.0';
  
     public function __construct(Container $container)
     {
